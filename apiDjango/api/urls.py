@@ -1,44 +1,29 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import (
-    ClientesListCreate, ClientesDetail, ClientesUpdate, ClientesDelete,
-    ZonasDisponiblesListCreate, ZonasDisponiblesDetail, ZonasDisponiblesUpdate, ZonasDisponiblesDelete,
-    EstadoReservasListCreate, EstadoReservasDetail, EstadoReservasUpdate, EstadoReservasDelete,
-    ReservarListCreate, ReservarDetail, ReservarUpdate, ReservarDelete,
-    CancelarReservaListCreate, CancelarReservaDetail, CancelarReservaUpdate, CancelarReservaDelete,
-)
+from . import views
 
 urlpatterns = [
     # URLs para Clientes
-    path('clientes/', ClientesListCreate.as_view(), name='clientes-list-create'),
-    path('clientes/detail/', ClientesDetail.as_view(), name='clientes-detail'),
-    path('clientes/update/<int:id>/', ClientesUpdate.as_view(), name='clientes-update'),
-    path('clientes/delete/<int:id>/', ClientesDelete.as_view(), name='clientes-delete'),
+    path('clientes/', views.ClientesListCreate.as_view(), name='clientes-list'),
+    path('clientes/<int:pk>/', views.ClientesDetail.as_view(), name='clientes-detail'),
 
     # URLs para ZonasDisponibles
-    path('zonas/', ZonasDisponiblesListCreate.as_view(), name='zonas-list-create'),
-    path('zonas/detail/', ZonasDisponiblesDetail.as_view(), name='zonas-detail'),
-    path('zonas/update/<int:id>/', ZonasDisponiblesUpdate.as_view(), name='zonas-update'),
-    path('zonas/delete/<int:id>/', ZonasDisponiblesDelete.as_view(), name='zonas-delete'),
+    path('zonas/', views.ZonasDisponiblesListCreate.as_view(), name='zonas-list'),
+    path('zonas/<int:pk>/', views.ZonasDisponiblesDetail.as_view(), name='zonas-detail'),
 
     # URLs para EstadoReservas
-    path('estado-reservas/', EstadoReservasListCreate.as_view(), name='estado-reservas-list-create'),
-    path('estado-reservas/detail/', EstadoReservasDetail.as_view(), name='estado-reservas-detail'),
-    path('estado-reservas/update/<int:id>/', EstadoReservasUpdate.as_view(), name='estado-reservas-update'),
-    path('estado-reservas/delete/<int:id>/', EstadoReservasDelete.as_view(), name='estado-reservas-delete'),
+    path('estado-reservas/', views.EstadoReservasListCreate.as_view(), name='estado-reservas-list'),
+    path('estado-reservas/<int:pk>/', views.EstadoReservasDetail.as_view(), name='estado-reservas-detail'),
 
     # URLs para Reservar
-    path('reservar/', ReservarListCreate.as_view(), name='reservar-list-create'),
-    path('reservar/detail/', ReservarDetail.as_view(), name='reservar-detail'),
-    path('reservar/update/<int:id>/', ReservarUpdate.as_view(), name='reservar-update'),
-    path('reservar/delete/<int:id>/', ReservarDelete.as_view(), name='reservar-delete'),
+    path('reservar/', views.ReservarListCreate.as_view(), name='reservar-list'),
+    path('reservar/<int:pk>/', views.ReservarDetail.as_view(), name='reservar-detail'),
 
     # URLs para CancelarReserva
-    path('cancelar-reserva/', CancelarReservaListCreate.as_view(), name='cancelar-reserva-list-create'),
-    path('cancelar-reserva/detail/', CancelarReservaDetail.as_view(), name='cancelar-reserva-detail'),
-    path('cancelar-reserva/update/<int:id>/', CancelarReservaUpdate.as_view(), name='cancelar-reserva-update'),
-    path('cancelar-reserva/delete/<int:id>/', CancelarReservaDelete.as_view(), name='cancelar-reserva-delete'),
+    path('cancelar-reserva/', views.CancelarReservaListCreate.as_view(), name='cancelar-reserva-list'),
+    path('cancelar-reserva/<int:pk>/', views.CancelarReservaDetail.as_view(), name='cancelar-reserva-detail'),
     
+    # URLs para autenticación
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/resfresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Corrección aquí
 ]
