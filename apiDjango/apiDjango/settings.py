@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-vq$tre&q+5*&va+!_h-(n4wlu!*-6_83a*d0s2b462(muq!vl%
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# settings.py
+
+CORS_ALLOW_ORIGINS = True
 
 
 # Application definition
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'apiDjango',
     'api',
+    'corsheaders',
     'rest_framework_simplejwt'
 ]
 
@@ -53,6 +57,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

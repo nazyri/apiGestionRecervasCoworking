@@ -10,9 +10,9 @@ class ClientesSerializer(serializers.ModelSerializer):
         
     def validate_nombre(self, value):
         """Valida que el nombre no esté vacío."""
-        if not value.strip():
+        if len() <= 5:
             raise serializers.ValidationError("El nombre no puede estar vacío.")
-        return value
+        return value # Devuelve el valor si es valido
 
     def validate_email(self, value):
         """Valida que el email no esté en uso."""

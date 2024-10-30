@@ -8,9 +8,9 @@ class Clientes(models.Model):
     apellido_cliente = models.CharField(max_length=100)
     email_cliente = models.EmailField()
     telefono_cliente = models.CharField(max_length=15)
-    clave_cliente = models.CharField(max_length=15)  # Corregido a CharField
+    clave_cliente = models.CharField(max_length=15)
 
-class ZonasDisponibles(models.Model):  # Renombrado a CamelCase
+class ZonasDisponibles(models.Model):
     """Clase zonas disponibles"""
     oficinas = models.BooleanField(default=True)  # True indica que está disponible
     salas_de_reuniones = models.BooleanField(default=True)
@@ -21,7 +21,7 @@ class ZonasDisponibles(models.Model):  # Renombrado a CamelCase
                f"Salas de Reuniones: {'Disponibles' if self.salas_de_reuniones else 'No Disponibles'}, " \
                f"Escritorios: {'Disponibles' if self.escritorios else 'No Disponibles'}"
 
-class EstadoReservas(models.Model):  # Renombrado a CamelCase
+class EstadoReservas(models.Model):
     """Clase estado de reservas"""
     ESTADO_OPCIONES = [
         ('activa', 'Activa'),
@@ -48,15 +48,15 @@ class Reservar(models.Model):
     cliente = models.ForeignKey(Clientes, on_delete=models.CASCADE)
     zonas_disponibles = models.ForeignKey(
         ZonasDisponibles,
-        on_delete=models.CASCADE)  # Corregido a CamelCase
+        on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Reserva de {self.cliente} para {self.zonas_disponibles} el {self.fecha_reserva}"
 
-class CancelarReserva(models.Model):  # Renombrado a CamelCase
+class CancelarReserva(models.Model):
     """Class representing a person"""
-    fecha_cancelacion = models.DateTimeField()  # Corregido 'feccha_cancelacion'
-    motivo = models.CharField(max_length=100)  # Cambiado a 'motivo'
+    fecha_cancelacion = models.DateTimeField()
+    motivo = models.CharField(max_length=100)
     reserva = models.ForeignKey(Reservar, on_delete=models.CASCADE)
 
     def __str__(self):

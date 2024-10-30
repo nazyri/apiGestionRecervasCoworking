@@ -39,3 +39,10 @@ api zonas
     "salas_de_reuniones": "false",
     "escritoriios": "false"
 }
+
+
+token
+{
+    "username": "moha",
+    "password": "119690203"
+}
