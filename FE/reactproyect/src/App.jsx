@@ -1,4 +1,5 @@
 import './App.css'
+import Clientes from './pages/Clientes'
 
 function App() {
 
@@ -6,7 +7,7 @@ function App() {
   return (
     <>
     <div>
-      
+      <Clientes/>
     </div>
     </>
   )
