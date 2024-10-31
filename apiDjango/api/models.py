@@ -9,6 +9,7 @@ class Clientes(models.Model):
     email_cliente = models.EmailField()
     telefono_cliente = models.CharField(max_length=15)
     clave_cliente = models.CharField(max_length=15)
+    activo_cliente = models.BooleanField(default=True)
 
 class ZonasDisponibles(models.Model):
     """Clase zonas disponibles"""
