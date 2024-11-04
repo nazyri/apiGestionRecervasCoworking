@@ -94,9 +94,9 @@ WSGI_APPLICATION = 'apiDjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apiGestionCoworking',  # El nombre de tu base de datos en MySQL
-        'USER': 'moha',  # Tu usuario de MySQL
-        'PASSWORD': '119690203',  # La contraseña de tu usuario MySQL
+        'NAME': 'mini_proyecto',  # El nombre de tu base de datos en MySQL
+        'USER': 'javier',  # Tu usuario de MySQL
+        'PASSWORD': '120203',  # La contraseña de tu usuario MySQL
         'HOST': '127.0.0.1',  # Si estás ejecutando MySQL localmente
         'PORT': '3306',  # El puerto por defecto de MySQL
     }
