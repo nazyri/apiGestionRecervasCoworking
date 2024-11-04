@@ -1,5 +1,5 @@
 import './App.css'
-import Clientes from './pages/Clientes'
+import Routing from './routes/Routing'
 
 function App() {
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
     <div>
-      <Clientes/>
+      <Routing/>
     </div>
     </>
   )
