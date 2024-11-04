@@ -46,3 +46,209 @@ token
     "username": "moha",
     "password": "119690203"
 }
+
+
+
+
+
+///TOKEN NUEVOO///
+
+
+lo del token nos enseñaron hacer en post man ahi nos dan permiso para agregar usuarios desde ahi
+ChatGPT said:
+ChatGPT
+Perfecto, podemos estructurar el sistema para que puedas realizar las operaciones de registro y login a través de Postman usando JWT para la autenticación. Aquí tienes un esquema de cómo puedes hacerlo.
+
+1. Estructura del Proyecto
+Asegúrate de que tienes todo configurado, como se mencionó antes. Aquí tienes un resumen de los pasos relevantes.
+
+2. Modificar las Vistas para Uso en Postman
+Vamos a asegurarnos de que las vistas están correctamente configuradas para ser utilizadas desde Postman.
+
+2.1. Vistas de Registro y Login
+En users/views.py, asegúrate de que tus vistas están listas para manejar solicitudes HTTP:
+
+python
+Copy code
+from rest_framework import generics, permissions
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import User
+from .serializers import UserSerializer, LoginSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class LoginView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        })
+3. Serializadores
+Asegúrate de que tus serializadores estén configurados correctamente para manejar el registro y la autenticación:
+
+python
+Copy code
+from rest_framework import serializers
+from .models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'role')
+
+    def create(self, validated_data):
+        user = User(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            role=validated_data.get('role', 'user')
+        )
+        user.set_password(validated_data['password'])  # Encriptar la contraseña
+        user.save()
+        return user
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        try:
+            user = User.objects.get(username=data['username'])
+            if not user.check_password(data['password']):
+                raise serializers.ValidationError('Invalid credentials')
+            return user
+        except User.DoesNotExist:
+            raise serializers.ValidationError('Invalid credentials')
+4. Configurar Rutas
+Asegúrate de que las rutas están correctamente definidas en users/urls.py:
+
+python
+Copy code
+from django.urls import path
+from .views import RegisterView, LoginView
+
+urlpatterns = [
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+]
+Y asegúrate de que en tu archivo principal urls.py incluyes estas rutas:
+
+python
+Copy code
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/users/', include('users.urls')),
+]
+5. Probar con Postman
+Ahora puedes probar tus endpoints utilizando Postman:
+
+5.1. Registro de Usuario
+Método: POST
+
+URL: http://localhost:8000/api/users/register/
+
+Cuerpo: En formato JSON (en la pestaña "Body" selecciona "raw" y luego "JSON"):
+
+json
+Copy code
+{
+    "username": "nuevo_usuario",
+    "email": "usuario@example.com",
+    "password": "contraseña_fuerte",
+    "role": "user"  // opcional
+}
+Enviar la solicitud.
+
+5.2. Login de Usuario
+Método: POST
+
+URL: http://localhost:8000/api/users/login/
+
+Cuerpo: En formato JSON:
+
+json
+Copy code
+{
+    "username": "nuevo_usuario",
+    "password": "contraseña_fuerte"
+}
+Enviar la solicitud.
+
+Si las credenciales son correctas, recibirás un token de acceso y un token de refresco en la respuesta.
+
+6. Uso del Token en Peticiones Autenticadas
+Para proteger otras rutas que requieran autenticación, debes añadir el token en los encabezados de las solicitudes:
+
+Encabezado: Authorization
+Valor: Bearer <tu_token_de_acceso>
+7. Proteger Rutas
+Si tienes rutas protegidas, asegúrate de que estás usando un decorador o middleware para verificar el token JWT. Por ejemplo, puedes usar un permission_classes en vistas específicas:
+
+python
+Copy code
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
+
+class ProtectedView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    # Tu queryset y serializer aquí
+8. Conclusión
+Con esta configuración, tu sistema de gestión de usuarios puede ser probado y utilizado a través de Postman,
+permitiendo el registro y la autenticación mediante JWT. Puedes extender este sistema con más características según sea necesario.
+Si necesitas más detalles o ayuda con algo específico, ¡hazme saber!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+
+// Configura CORS
+app.use(cors()); // Esto permite todas las solicitudes de cualquier origen
+
+// O, si quieres permitir solo un origen específico, usa:
+// app.use(cors({ origin: 'http://localhost:5173' }));
+
+app.use(express.json()); // Middleware para parsear JSON
+
+// Define tus rutas aquí
+app.get('/api/clientes', (req, res) => {
+    // Lógica para manejar la solicitud
+    res.send('Respuesta de clientes');
+});
+
+// Inicia el servidor
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});

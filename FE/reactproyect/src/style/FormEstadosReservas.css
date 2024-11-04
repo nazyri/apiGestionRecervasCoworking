@@ -1,0 +1,79 @@
+/* EstadoReservasForm.css */
+
+form {
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 40px auto; /* Centramos el formulario */
+    padding: 20px; /* Espacio interno */
+    border: 1px solid #e0e0e0; /* Borde suave */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #ffffff; /* Fondo blanco */
+    margin-left: 800px;
+}
+
+h1 {
+    text-align: center; /* Título centrado */
+    font-size: 24px; /* Tamaño de fuente del título */
+    color: #333; /* Color del texto */
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+div {
+    margin-bottom: 15px; /* Espacio entre grupos */
+}
+
+label {
+    display: block; /* Cada etiqueta ocupa una línea completa */
+    margin-bottom: 5px; /* Espacio debajo de las etiquetas */
+    font-weight: 600; /* Negrita para destacar las etiquetas */
+    color: #555; /* Color de las etiquetas */
+}
+
+select {
+    width: 100%; /* Ancho completo del select */
+    padding: 10px; /* Espacio interno */
+    border: 1px solid #ccc; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+select:focus {
+    border-color: #007bff; /* Color del borde al enfocar */
+    outline: none; /* Sin contorno por defecto */
+}
+
+p {
+    text-align: center; /* Centramos los mensajes */
+    font-size: 14px; /* Tamaño de fuente de los mensajes */
+}
+
+button {
+    width: 100%; /* Botón de ancho completo */
+    padding: 12px; /* Espacio interno */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 18px; /* Tamaño de fuente del botón */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+button:hover {
+    background-color: #0056b3; /* Color al pasar el ratón */
+}
+
+.error-message {
+    color: #d9534f; /* Color rojo para mensajes de error */
+    font-size: 14px; /* Tamaño de fuente de los mensajes de error */
+    text-align: center; /* Centramos el mensaje de error */
+    margin-top: 10px; /* Espacio encima del mensaje */
+}
+
+.success-message {
+    color: #5cb85c; /* Color verde para mensajes de éxito */
+    font-size: 14px; /* Tamaño de fuente de los mensajes de éxito */
+    text-align: center; /* Centramos el mensaje de éxito */
+    margin-top: 10px; /* Espacio encima del mensaje */
+}
